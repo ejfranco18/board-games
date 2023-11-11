@@ -1,8 +1,8 @@
 import React, { ChangeEvent, useState } from 'react';
 import { AddGameFormStyled } from './AddGameForm.styled';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
-  addGameDB,
+  addGameDB, selectUser,
 } from '../../state/gameSlice';
 import Button from '../Button/Button';
 import Input from '../Input/Input';
@@ -15,6 +15,8 @@ const AddGameForm: React.FC = () => {
   const [maxPlayers, setMaxPlayers] = useState<number>(0);
   const [type, setType] = useState<string>('Basegame');
   const dispatch = useDispatch();
+
+  const user = useSelector(selectUser);
 
   const handleName = (event: ChangeEvent<HTMLInputElement>): void => {
     setGameName(event.target.value);
@@ -39,12 +41,15 @@ const AddGameForm: React.FC = () => {
   const handleAddGame = (): void => {
     dispatch(
       addGameDB({
-        id: '',
-        name: gameName,
-        image,
-        minPlayers,
-        maxPlayers,
-        type,
+        userId: user.user,
+        newGame: {
+          id: '',
+          name: gameName,
+          image,
+          minPlayers,
+          maxPlayers,
+          type,
+        }
       })
     );
     setGameName('');

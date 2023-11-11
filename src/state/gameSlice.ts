@@ -12,8 +12,6 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { db } from '../db/firebase';
 import { GameType, UserType } from '../Interfaces';
 import { RootState } from './store';
-import { auth } from '../db/firebase';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
 
 export type GameState = {
   games: GameType[];
@@ -31,9 +29,10 @@ export const initialUserState: UserState = {
   users: [],
 };
 
-const gamesCollectionRef = collection(db, 'games');
 
-export const getGames = createAsyncThunk('getGames', async () => {
+
+export const getGames = createAsyncThunk('getGames', async (userId: {uid: string} | null) => {
+  const gamesCollectionRef = collection(db, `games-${userId?.uid}`);
   const data = await getDocs(gamesCollectionRef);
   const result = data.docs.map((doc) => {
     return {
@@ -50,8 +49,8 @@ export const getGames = createAsyncThunk('getGames', async () => {
 
 export const addGameDB = createAsyncThunk(
   'addGAmes',
-  async (newGame: GameType) => {
-    const newDoc = await addDoc(gamesCollectionRef, newGame);
+  async ({userId, newGame}: {userId: {uid: string} | null, newGame: GameType}) => {
+    const newDoc = await addDoc(collection(db, `games-${userId?.uid}`), newGame);
     return { ...newGame, id: newDoc.id };
   }
 );

@@ -30,7 +30,6 @@ const register = async () => {
       userEmail,
       password
     );
-    console.log(user);
   } catch (error) {
     console.log(error);
   }
