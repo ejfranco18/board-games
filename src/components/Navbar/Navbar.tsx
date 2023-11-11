@@ -27,7 +27,8 @@ const Navbar = () => {
             (<li><a className="navbar-item"onClick={logoutOfApp}>Logout</a></li>):
             (<li><Link className="navbar-item" to="/login">Login</Link></li>)
           }
-          <li><Link className="navbar-item" to="/signup">Signup</Link></li>
+          {!user.user && <li><Link className="navbar-item" to="/signup">Signup</Link></li>}
+
         </ul>
       </nav>
     </NavbarStyled>

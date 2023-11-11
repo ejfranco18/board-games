@@ -50,7 +50,6 @@ const Login: React.FC = () => {
     <LoginStyled>
         {user.user && <Navigate replace to="/" />}
       <h1>Login</h1>
-      <h2>{user.user ? user.user['email'] : "LOGIN"}</h2>
         <div className="form-wrapper">
             <Input
               type="text"

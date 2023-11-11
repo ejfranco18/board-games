@@ -20,6 +20,19 @@ h1 {
   margin-block: 40px;
 }
 
+h2 {
+  color: #fff;
+  font-family: Monospace, cursive;
+  font-size: 35px;
+  font-weight: normal;
+  line-height: 60px;
+  margin: 10px 0 20px;
+  text-transform: uppercase;
+  text-shadow: rgba(20, 20, 20, 0.6) 3px 3px 2px;
+  text-align: center;
+  margin-block: 40px;
+}
+
 a {
   text-decoration: none;
 }
