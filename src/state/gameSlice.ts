@@ -34,7 +34,7 @@ export const getGames = createAsyncThunk('getGames', async (userId: UserType) =>
   const data = await getDocs(gamesCollectionRef);
   const result = data.docs.map((doc) => {
     return {
-      id: doc.id,
+      id: doc.data().id,
       name: doc.data().name,
       image: doc.data().image,
       minPlayers: doc.data().minPlayers,
@@ -49,6 +49,14 @@ export const addGameDB = createAsyncThunk(
   'addGAmes',
   async ({userId, newGame}: {userId: {uid: string} | null, newGame: GameType}) => {
     const newDoc = await addDoc(collection(db, `games-${userId?.uid}`), newGame);
+    const gameDoc = doc(db, `games-${userId?.uid}`, newDoc.id );
+
+    updateDoc(gameDoc,{
+      id:newDoc.id
+    } ).then(response => {
+      alert("updated")
+    });
+
     return { ...newGame, id: newDoc.id };
   }
 );
