@@ -10,4 +10,5 @@ export interface GameType {
 export interface UserType {
   email: string;
   password: string;
+  uid: string | null;
 }

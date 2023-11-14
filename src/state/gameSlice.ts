@@ -18,7 +18,7 @@ export type GameState = {
 };
 
 export type UserState = {
-  users: UserType[];
+  user: UserType[] | any;
 };
 
 export const initialGameState: GameState = {
@@ -26,12 +26,12 @@ export const initialGameState: GameState = {
 };
 
 export const initialUserState: UserState = {
-  users: [],
+  user: [],
 };
 
 
 
-export const getGames = createAsyncThunk('getGames', async (userId: {uid: string} | null) => {
+export const getGames = createAsyncThunk('getGames', async (userId: UserType) => {
   const gamesCollectionRef = collection(db, `games-${userId?.uid}`);
   const data = await getDocs(gamesCollectionRef);
   const result = data.docs.map((doc) => {
@@ -117,15 +117,13 @@ export const gameSlice = createSlice({
 
 export const userSlice = createSlice({
   name: 'user',
-  initialState: {
-    user: null,
-  },
+  initialState: initialUserState,
   reducers: {
     login: (state, action) => {
       state.user = action.payload;
     },
     logout: (state) => {
-      state.user = null;
+      state.user = [];
     },
   },
 });

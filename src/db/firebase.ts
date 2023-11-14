@@ -8,7 +8,16 @@ import { getAuth,
   signInWithEmailAndPassword,
   signOut } from 'firebase/auth';
 
-const firebaseConfig = {
+  type FirebaseConfigType = {
+    apiKey: any,
+    authDomain: any,
+    projectId: any,
+    storageBucket: any,
+    messagingSenderId: any,
+    appId: any,
+  }
+
+const firebaseConfig: FirebaseConfigType = {
   apiKey: import.meta.env.VITE_FIREBASE_KEY,
   authDomain: import.meta.env.VITE_FIREBASE_DOMAIN,
   projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
