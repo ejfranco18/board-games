@@ -51,7 +51,7 @@ const register = async () => {
             onChange={handleEmail}
           />
           <Input
-            type="text"
+            type="password"
             name="password"
             placeholder="Password"
             value={password}

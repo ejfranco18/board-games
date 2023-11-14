@@ -6,7 +6,7 @@ export const ButtonStyled = styled.button`
   width: 280px;
   height: 36px;
   border-radius: 18px;
-  background-color: ${({ theme }) => theme.colors.lightGreen};
+  background-color: ${({ theme }) => theme.colors.yellowGreen};
   border: solid 1px transparent;
   color: ${({ theme }) => theme.colors.onyx};
   font-size: 18px;
@@ -19,7 +19,7 @@ export const ButtonStyled = styled.button`
   }
 
   &:disabled {
-    background-color: ${({ theme }) => theme.colors.lightMing};
+    background-color: ${({ theme }) => theme.colors.asparagus};
     cursor: none;
     color: ${({ theme }) => theme.colors.grey};
   }

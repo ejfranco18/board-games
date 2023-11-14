@@ -9,14 +9,12 @@ const Game: React.FC<GameStyledProps> = ({
   return (
     <Link to={'/game/' + game.id}>
       <GameStyled>
-        <div>
-          <img style={{borderWidth: '3px', width:'300px', height:'300px', objectFit:'cover'}} alt={game.name} src={game.image}/>
+          <img alt={game.name} src={game.image}/>
           <div className='game-info'>
-            <p>{game.name}</p>
+            <p className='title'>{game.name}</p>
             <p>Players: {game.minPlayers} - {game.maxPlayers}</p>
             <p>Type: {game.type}</p>
           </div>
-        </div>
       </GameStyled>
     </Link>
   );

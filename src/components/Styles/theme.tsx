@@ -4,8 +4,15 @@ import { ThemeProvider } from 'styled-components';
 
 const theme = {
   colors: {
+    eerieBlack: '#1B1B1E',
+    eerieBlackTransparent: 'rgb(27, 27, 30, 0.4)',
+    platinum: '#D8DBE2',
+    charcoal: '#373F51',
+    moonstone: '#58A4B0',
+    yellowGreen: '#85CB33',
+    asparagus: '#9fe74d',
     blue: '#32a1ce',
-    cambrigeBlue: '#ABC4AB',
+    kellyGreen: '#72b723',
     darkGrey: '#666666',
     grey: '#bbbbbb',
     lightGreen: '#7ADFBB',
@@ -14,7 +21,8 @@ const theme = {
     onyx: '#36313D',
     orange: '#ee714f',
     persianGreen: '#06B49A',
-    platinum: '#EAEAEA',
+    silver: '#C5C6C7',
+    silverTransparent: 'rgb(197, 198, 199, 0.8)',
     transparentWhite: 'rgba(255, 253, 249, 0.4)',
     white: '#e6e6e6',
   },

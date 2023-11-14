@@ -59,7 +59,7 @@ const Login: React.FC = () => {
               onChange={handleEmail}
             />
             <Input
-              type="text"
+              type="password"
               name="password"
               placeholder="Password"
               value={password}

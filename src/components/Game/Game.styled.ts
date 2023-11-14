@@ -1,34 +1,37 @@
 import styled from 'styled-components';
 
 export const GameStyled = styled.div`
-  background: ${({ theme }) => theme.colors.transparentWhite};
-  border-radius: 20px;
-  margin: 5px;
+  background: ${({ theme }) => theme.colors.platinum};
+  border-radius: 8px;
+  margin: 15px;
   padding: 10px;
-  width: 340px;
+  width: 440px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   transform: translateZ( 0 );
   transition: transform .2s ease-out;
+  display: flex;
+  padding-block: 35px;
 
-  &:hover {
+  /* &:hover {
     transform: scale( 1.02 );
-  }
+  } */
 
   p {
-    color: ${({ theme }) => theme.colors.onyx};
+    color: ${({ theme }) => theme.colors.charcoal};
   }
 
-  span {
-    color: ${({ theme }) => theme.colors.onyx};
+  .title {
+    font-size: 22px;
     font-weight: bold;
+    margin: 0 0 25px;
   }
 
   img {
     border: 3px solid black;
-    width: 300px;
-    height: 300px;
+    width: 260px;
+    height: 260px;
     object-fit: cover;
+    border-radius: 8px;
+    margin-right: 15px;
   }
 `;

@@ -26,10 +26,8 @@ export const initialGameState: GameState = {
 };
 
 export const initialUserState: UserState = {
-  user: [],
+  user: null,
 };
-
-
 
 export const getGames = createAsyncThunk('getGames', async (userId: UserType) => {
   const gamesCollectionRef = collection(db, `games-${userId?.uid}`);
@@ -123,7 +121,7 @@ export const userSlice = createSlice({
       state.user = action.payload;
     },
     logout: (state) => {
-      state.user = [];
+      state.user = null;
     },
   },
 });

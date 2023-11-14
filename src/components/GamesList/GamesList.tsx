@@ -6,8 +6,6 @@ import { GameType } from '../../Interfaces';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../../state/gameSlice';
 
-
-
 const GamesList: React.FC<GamesListStyledProps> = ({
   games
 }) => {
