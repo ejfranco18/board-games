@@ -1,13 +1,13 @@
 import React from 'react';
 import { GameStyled } from './Game.styled';
 import { GameStyledProps } from './Game.types';
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 
 const Game: React.FC<GameStyledProps> = ({
   game
 }) => {
   return (
-    <Link to={'/game/' + game.id}>
+    // <Link to={'/game/' + game.id}>
       <GameStyled>
           <img alt={game.name} src={game.image}/>
           <div className='game-info'>
@@ -16,7 +16,7 @@ const Game: React.FC<GameStyledProps> = ({
             <p>Type: {game.type}</p>
           </div>
       </GameStyled>
-    </Link>
+    // </Link>
   );
 };
 

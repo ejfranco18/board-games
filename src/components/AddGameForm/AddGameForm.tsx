@@ -14,6 +14,7 @@ const AddGameForm: React.FC = () => {
   const [minPlayers, setMinPlayers] = useState<number>(0);
   const [maxPlayers, setMaxPlayers] = useState<number>(0);
   const [type, setType] = useState<string>('Basegame');
+  const [gameAdded, setGameAdded] = useState<boolean>(false);
   const dispatch = useDispatch();
 
   const user = useSelector(selectUser);
@@ -52,59 +53,81 @@ const AddGameForm: React.FC = () => {
         }
       })
     );
+    setGameAdded(true)
+  };
+
+  const handleReset = (): void => {
     setGameName('');
     setImage('');
     setMinPlayers(0);
     setMaxPlayers(0);
     setType('Basegame');
+    setGameAdded(false)
   };
 
   const options = ["Basegame","Expansion"]
 
   const disabledButton = !(gameName && image && minPlayers && maxPlayers);
 
+
+  const form = gameAdded ?(
+    <>
+      <h1 className='game-title'>{gameName}</h1>
+      <h2>Was added to the inventory</h2>
+      <div className='image-wrapper'>
+        <img alt={gameName} src={image}/>
+      </div>
+      <Button
+        onClick={handleReset}
+        text={'Add a new game'}
+      />
+    </>
+    ) : (
+      <>
+        <h1>Add a new game to the inventory</h1>
+        <div className="form-wrapper">
+          <Input
+            type="text"
+            name="gameName"
+            placeholder="Game Name"
+            value={gameName}
+            onChange={handleName}
+          />
+          <Input
+            type="text"
+            name="image"
+            placeholder="Image URL"
+            value={image}
+            onChange={handleImage}
+          />
+          <Input
+            type="number"
+            name="minPlayers"
+            value={minPlayers !== 0 ? minPlayers : ""}
+            placeholder="Minimum number of players"
+            onChange={handleMinPlayers}
+          />
+          <Input
+            type="number"
+            name="maxPlayers"
+            value={maxPlayers !== 0 ? maxPlayers : ""}
+            placeholder="Maximum number of players"
+            onChange={handleMaxPlayers}
+          />
+          <Dropdown options={options} onChange={handleType}/>
+          <Button
+            onClick={handleAddGame}
+            text={'Add Game'}
+            disabled={disabledButton}
+          />
+        </div>
+      </>
+  );
+
   return (
     <AddGameFormStyled>
       {user.user?
-        (<>
-          <h1>Add a new game to the inventory</h1>
-          <div className="form-wrapper">
-            <Input
-              type="text"
-              name="gameName"
-              placeholder="Game Name"
-              value={gameName}
-              onChange={handleName}
-            />
-            <Input
-              type="text"
-              name="image"
-              placeholder="Image URL"
-              value={image}
-              onChange={handleImage}
-            />
-            <Input
-              type="number"
-              name="minPlayers"
-              value={minPlayers !== 0 ? minPlayers : ""}
-              placeholder="Minimum number of players"
-              onChange={handleMinPlayers}
-            />
-            <Input
-              type="number"
-              name="maxPlayers"
-              value={maxPlayers !== 0 ? maxPlayers : ""}
-              placeholder="Maximum number of players"
-              onChange={handleMaxPlayers}
-            />
-            <Dropdown options={options} onChange={handleType}/>
-            <Button
-              onClick={handleAddGame}
-              text={'Add Game'}
-              disabled={disabledButton}
-            />
-          </div>
-          </>) :
+        form :
         <h2>Login to add games to your inventory</h2>
       }
     </AddGameFormStyled>

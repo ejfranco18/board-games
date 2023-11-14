@@ -8,4 +8,13 @@ export const AddGameFormStyled = styled.div`
     border-radius: 20px;
     margin: 20px auto;
   }
+
+  .game-title {
+    font-style: italic;
+  }
+
+  .image-wrapper {
+    margin: 0 auto 60px;
+    width: fit-content;
+  }
 `;

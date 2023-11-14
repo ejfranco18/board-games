@@ -53,8 +53,6 @@ export const addGameDB = createAsyncThunk(
 
     updateDoc(gameDoc,{
       id:newDoc.id
-    } ).then(response => {
-      alert("updated")
     });
 
     return { ...newGame, id: newDoc.id };

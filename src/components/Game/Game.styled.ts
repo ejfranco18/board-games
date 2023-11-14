@@ -28,8 +28,10 @@ export const GameStyled = styled.div`
 
   img {
     border: 3px solid black;
-    width: 260px;
-    height: 260px;
+    min-width: 260px;
+    min-height: 260px;
+    max-width: 260px;
+    max-height: 260px;
     object-fit: cover;
     border-radius: 8px;
     margin-right: 15px;
