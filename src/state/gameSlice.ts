@@ -46,7 +46,7 @@ export const getGames = createAsyncThunk('getGames', async (userId: UserType) =>
 });
 
 export const addGameDB = createAsyncThunk(
-  'addGAmes',
+  'addGames',
   async ({userId, newGame}: {userId: {uid: string} | null, newGame: GameType}) => {
     const newDoc = await addDoc(collection(db, `games-${userId?.uid}`), newGame);
     const gameDoc = doc(db, `games-${userId?.uid}`, newDoc.id );
@@ -62,7 +62,6 @@ export const addGameDB = createAsyncThunk(
 export const updateGameDB = createAsyncThunk(
   'updateGames',
   async (id: string) => {
-    console.log('slice update', id)
     const gameDoc = doc(db, 'games', id);
     const docSnap = await getDoc(gameDoc);
     const status = !docSnap.data()!.completed
@@ -74,11 +73,10 @@ export const updateGameDB = createAsyncThunk(
 
 export const deleteGameDB = createAsyncThunk(
   'deleteGames',
-  async (id: string) => {
-    console.log('slice delete', id)
-    const gameDoc = doc(db, 'games', id);
+  async ({userId, gameId}: {userId: {uid: string}, gameId: any}) => {
+    const gameDoc = doc(db, `games-${userId?.uid}`, gameId);
     await deleteDoc(gameDoc);
-    return id;
+    return gameId;
   }
 );
 

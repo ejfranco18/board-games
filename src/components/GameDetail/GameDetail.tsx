@@ -1,37 +1,61 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { GameDetailStyled } from './GameDetail.styled';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
+  deleteGameDB,
   selectGames,
+  selectUser,
 } from '../../state/gameSlice';
-import { useParams } from 'react-router-dom';
-import { GameType } from '../../Interfaces';
+import { Navigate, useParams } from 'react-router-dom';
+import CustomButton from '../CustomButton/CustomButton';
 
-const Game: React.FC = () => {
+const GameDetail: React.FC = () => {
+  const [gameDeleted, setGameDeleted] = useState<boolean>(false);
   const gamesStates = useSelector(selectGames).games;
-  const id = useParams().id;
+  const user = useSelector(selectUser);
+  const dispatch = useDispatch();
+  const gameId = useParams().id;
 
+  const handleDeleteGame = (): void => {
+    dispatch(
+      deleteGameDB({userId: user.user, gameId})
+    );
+    setGameDeleted(true);
+  };
 
   const filteredGame = gamesStates.find((game) => {
-     return game.id === id;
+    return game.id === gameId;
   });
 
+  const redirection = gameDeleted ? (
+    <Navigate replace to="/" />
+  ) : (
+    <h1>Loading...</h1>
+  )
 
   return (
     <GameDetailStyled>
       {
         filteredGame ? (
           <>
-            <img style={{borderWidth: '3px', width:'300px', height:'300px', objectFit:'cover'}} alt={filteredGame.name} src={filteredGame.image}/>
-            <div className='game-info'>
-              <p>{filteredGame.name}</p>
-              <p>Players: {filteredGame.minPlayers} - {filteredGame.maxPlayers}</p>
-              <p>Type: {filteredGame.type}</p>
+            <h1>{filteredGame.name}</h1>
+            <div className='details'>
+              <img style={{borderWidth: '3px', width:'300px', height:'300px', objectFit:'cover'}} alt={filteredGame.name} src={filteredGame.image}/>
+              <div className='game-info'>
+                <p>{filteredGame.name}</p>
+                <p>Players: {filteredGame.minPlayers} - {filteredGame.maxPlayers}</p>
+                <p>Type: {filteredGame.type}</p>
+                <CustomButton
+                  onClick={(handleDeleteGame)}
+                  text={'Delete'}
+                />
+              </div>
+
             </div>
           </>
         ) :
         (
-          <p>NO</p>
+          redirection
         )
       }
 
@@ -39,9 +63,4 @@ const Game: React.FC = () => {
   );
 };
 
-export default Game;
-
-
-// state.games = state.games.filter((game) => {
-//     return game.id !== action.payload;
-//   });
+export default GameDetail;
